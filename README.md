@@ -100,3 +100,6 @@ because it reintroduces the overfitting risk that CI was designed to avoid.
 - A. Zeng, M. Chen, L. Zhang, and Q. Xu. "Are Transformers effective for time series forecasting?" AAAI, 37(9), 2023.
 
 - H. Wu, J. Xu, J. Wang, and M. Long. "Autoformer: Decomposition Transformers with auto-correlation for long-term series forecasting." NeurIPS, 2021.
+
+## Acknowledgements
+This project was completed as part of CS5782: Introduction to Deep Learning (Spring 2026) at Cornell University, under the instruction and grading oversight of the course staff. The project was a collaborative effort by Kayla Yang, Pratvi Shah, and Nile Chen. We thank the original PatchTST, iTransformer and DLinear authors for open-sourcing their code and data loaders, which served as the foundation for our unified evaluation harness.
