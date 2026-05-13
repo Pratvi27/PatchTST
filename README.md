@@ -1,4 +1,4 @@
-# PatchTST vs iTransformer: Compute-Matched LTSF Reproduction
+# Channel Independence Wins All? Reproducing and Extending PatchTST
 
 This repo contains a re-implementation of PatchTST (Nie et al., ICLR 2023), a patch-based Transformer for long-term time-series forecasting (LTSF). PatchTST's core contribution is channel independence (CI). We benchmark it head-to-head against iTransformer (channel-dependent, CD) and DLinear (parameter-efficient linear baseline) under identical training conditions, and introduce Stochastic Channel Mixing (SCM) to probe the CI/CD trade-off.
 
@@ -40,7 +40,7 @@ After downloading, place the CSV files where the scripts expect them
 - `report/`                 Final report
 - `poster/`                 Project poster
 
-## Quick Usage
+## Reproduction Steps
 
 ### Custom PatchTST/64
 ```bash
@@ -72,6 +72,24 @@ python experiments/make_correlation_heatmap.py
 python experiments/make_main_figure.py
 python experiments/make_reproduction_figure.py
 ```
+## Results/Insights
+<img width="1272" height="496" alt="image" src="https://github.com/user-attachments/assets/0c653e90-3fee-4084-a047-debf2d79bd8c" />
+
+- PatchTST achieves the lowest MSE on all 12 cells; iTransformer never wins. Our reproduced PatchTST values fall within 1–2% of the
+original paper on Weather and Electricity, with a slightly larger gap on Traffic(large dataset which
+needs more training), consistent with the reduced 20-epoch budget. DLinear remains competitive
+at shorter horizons (96, 192), reinforcing that simple baselines should not be overlooked.
+
+- CI’s advantage narrows as correlation between channels grow—from ∼12%
+MSE reduction on Weather to ∼2% on Traffic—but never disappears within this benchmark set.
+This suggests CI is a robust default for low-to-moderate correlation regimes, while high-correlation
+settings may benefit from controlled mixing.
+
+- SCM Result: Light mixing at α=0.25 yields a
+0.6% MSE reduction over pure CI, consistent across horizons. At α=0.50 gains vanish, and α≥0.75
+degrades performance below the CI baseline. This confirms that CI is near-optimal but not strictly
+so: a small dose of cross-channel information helps, but heavy mixing hurts generalization—likely
+because it reintroduces the overfitting risk that CI was designed to avoid.
 
 ## References
 
