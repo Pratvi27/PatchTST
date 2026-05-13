@@ -33,7 +33,6 @@ After downloading, place the CSV files where the scripts expect them
 
 - `patchtst_custom/`        Custom PatchTST/64 implementation
 - `itransformer_wrappers/`  Shell wrappers for thuml/iTransformer
-- `patchtst_repo_scripts/`  Shell wrappers for yuqinie98/PatchTST
 - `experiments/`            Standalone Python scripts (SCM, DLinear, figures)
 - `notebooks/`              Jupyter notebooks for SCM ablation and DLinear
 - `results_summary/`        Final figures used in the poster
